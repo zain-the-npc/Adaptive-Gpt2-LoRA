@@ -1,3 +1,14 @@
+---
+title: Adaptive Gpt2 LoRA
+emoji: 🎭
+colorFrom: blue
+colorTo: purple
+sdk: gradio
+sdk_version: "6.20.0"
+app_file: app.py
+pinned: false
+---
+
 # One Model, Many Minds
 
 One frozen GPT-2, five swappable LoRA personas — **hand-written LoRA implementation, no `peft` library**.
