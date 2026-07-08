@@ -9,6 +9,8 @@ Hand-written LoRA implementation — no `peft`. Trains 5 independent LoRA adapte
 **Live demo (frontend):** https://adaptive-gpt2-lo-ra.vercel.app
 **Live demo (backend, Gradio):** https://huggingface.co/spaces/zain-the-npc/adaptive-gpt2-lora
 
+![Adaptive GPT-2 LoRA demo](demo-screenshot.png)
+
 ## Why this exists
 
 Most LoRA projects call `peft.get_peft_model()` and stop there. This implements the math directly — frozen weight `W`, trainable low-rank matrices `A` and `B`, computing:
