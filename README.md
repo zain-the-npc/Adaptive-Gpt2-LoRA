@@ -1,13 +1,4 @@
----
-title: Adaptive Gpt2 LoRA
-emoji: 🎭
-colorFrom: blue
-colorTo: purple
-sdk: gradio
-sdk_version: "6.20.0"
-app_file: app.py
-pinned: false
----
+
 
 # Adaptive GPT-2 LoRA
 
