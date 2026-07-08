@@ -4,7 +4,7 @@
 
 Hand-written LoRA implementation — no `peft`. Trains 5 independent LoRA adapters on GPT-2, each swappable at inference without reloading the base model.
 
-## built to understand Low Rank Adaptation (LoRA) mechanics
+## ( built to understand Low Rank Adaptation (LoRA) mechanics )
 
 **Live demo (frontend):** https://adaptive-gpt2-lo-ra.vercel.app
 **Live demo (backend, Gradio):** https://huggingface.co/spaces/zain-the-npc/adaptive-gpt2-lora
