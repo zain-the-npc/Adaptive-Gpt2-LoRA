@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Adaptive GPT-2 LoRA - Personas</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-dim": "#dadada",
+                        "outline": "#747878",
+                        "surface-tint": "#5f5e5e",
+                        "on-secondary-container": "#626262",
+                        "tertiary-container": "#1a1c1c",
+                        "inverse-surface": "#2f3131",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "secondary-container": "#e1dfdf",
+                        "surface-container-high": "#e8e8e8",
+                        "primary-fixed-dim": "#c8c6c5",
+                        "surface-container": "#eeeeee",
+                        "on-primary-container": "#858383",
+                        "background": "#f9f9f9",
+                        "on-surface-variant": "#444748",
+                        "outline-variant": "#c4c7c7",
+                        "on-secondary-fixed": "#1b1c1c",
+                        "surface-container-highest": "#e2e2e2",
+                        "inverse-primary": "#c8c6c5",
+                        "error": "#ba1a1a",
+                        "on-tertiary-container": "#838484",
+                        "tertiary": "#000000",
+                        "inverse-on-surface": "#f0f1f1",
+                        "on-background": "#1a1c1c",
+                        "surface": "#f9f9f9",
+                        "on-primary-fixed": "#1c1b1b",
+                        "secondary-fixed-dim": "#c7c6c6",
+                        "secondary-fixed": "#e4e2e2",
+                        "on-secondary-fixed-variant": "#464747",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "surface-container-low": "#f3f3f3",
+                        "error-container": "#ffdad6",
+                        "primary-container": "#1c1b1b",
+                        "surface-variant": "#e2e2e2",
+                        "surface-bright": "#f9f9f9",
+                        "on-primary-fixed-variant": "#474746",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed": "#e2e2e2",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface": "#1a1c1c",
+                        "primary-fixed": "#e5e2e1",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "secondary": "#5e5e5e",
+                        "primary": "#000000",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed-dim": "#c6c6c6",
+                        "persona-pirate": "#0d9488",
+                        "persona-bard": "#dc2626",
+                        "persona-genz": "#db2777",
+                        "persona-coach": "#f59e0b",
+                        "persona-detective": "#334155"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "4px",
+                        "lg": "6px",
+                        "xl": "8px",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "gutter": "16px",
+                        "container-max": "1280px",
+                        "margin-desktop": "32px",
+                        "unit": "4px",
+                        "margin-mobile": "16px"
+                    },
+                    fontFamily: {
+                        "headline-md": ["Inter"],
+                        "label-md": ["JetBrains Mono"],
+                        "headline-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["JetBrains Mono"],
+                        "body-lg": ["Inter"],
+                        "headline-sm": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #f9f9f9;
+            color: #1a1c1c;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .tech-card {
+            background: #ffffff;
+            border: 1px solid #e2e2e2;
+            transition: all 0.2s ease;
+        }
+
+        .tech-card:hover {
+            border-color: #747878;
+        }
+
+        .tech-card-selected {
+            border: 2px solid #db2777; /* Gen-Z Pink Accent */
+            background: #ffffff;
+        }
+
+        .persona-square {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #e2e2e2;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+            background: #f3f3f3;
+        }
+
+        .weight-bar-bg {
+            background: #eeeeee;
+            height: 4px;
+            width: 100%;
+        }
+
+        .weight-bar-fill {
+            height: 100%;
+            transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
+        }
+
+        .chat-bubble {
+            border: 1px solid #e2e2e2;
+            padding: 12px 16px;
+            max-width: 85%;
+        }
+    </style>
+</head>
+<body class="text-on-surface min-h-screen pb-32">
+<!-- Header Section -->
+<header class="flex flex-col items-center justify-center pt-12 pb-8 w-full max-w-7xl mx-auto px-6 text-center">
+<div class="mb-4">
+<span class="font-label-md text-[10px] text-on-surface-variant uppercase tracking-[0.2em] border border-outline-variant px-3 py-1">
+            MODEL: GPT-2 SMALL (LORA)
+        </span>
+</div>
+<h1 class="text-headline-lg font-bold text-primary mb-2 uppercase tracking-tight">Adaptive Personas</h1>
+<p class="text-body-md text-on-surface-variant max-w-lg mx-auto">
+        Select a persona to begin fine-tuned inference and experience adaptive personality shifting.
+    </p>
+</header>
+<main class="max-w-7xl mx-auto px-6 space-y-12">
+<!-- Character Row -->
+<section class="grid grid-cols-2 md:grid-cols-5 gap-4">
+<!-- Pirate -->
+<button class="tech-card p-5 flex flex-col items-start gap-4 rounded">
+<div class="persona-square text-persona-pirate">P</div>
+<div class="w-full text-left">
+<h3 class="font-bold text-sm uppercase tracking-wide">Pirate</h3>
+<p class="font-label-sm text-[10px] text-outline uppercase mt-1">AURA: TEAL</p>
+</div>
+<div class="w-full mt-2">
+<div class="flex justify-between mb-2">
+<span class="font-label-sm text-[9px] text-outline">LORA_WEIGHT</span>
+<span class="font-label-sm text-[9px]">0.65</span>
+</div>
+<div class="weight-bar-bg">
+<div class="weight-bar-fill bg-persona-pirate" style="width: 65%;"></div>
+</div>
+</div>
+</button>
+<!-- Bard -->
+<button class="tech-card p-5 flex flex-col items-start gap-4 rounded">
+<div class="persona-square text-persona-bard">B</div>
+<div class="w-full text-left">
+<h3 class="font-bold text-sm uppercase tracking-wide">Bard</h3>
+<p class="font-label-sm text-[10px] text-outline uppercase mt-1">AURA: CRIMSON</p>
+</div>
+<div class="w-full mt-2">
+<div class="flex justify-between mb-2">
+<span class="font-label-sm text-[9px] text-outline">LORA_WEIGHT</span>
+<span class="font-label-sm text-[9px]">0.82</span>
+</div>
+<div class="weight-bar-bg">
+<div class="weight-bar-fill bg-persona-bard" style="width: 82%;"></div>
+</div>
+</div>
+</button>
+<!-- Selected: Gen-Z -->
+<button class="tech-card tech-card-selected p-5 flex flex-col items-start gap-4 rounded relative">
+<div class="absolute top-3 right-3">
+<span class="material-symbols-outlined text-persona-genz text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="persona-square text-persona-genz border-persona-genz/30">G</div>
+<div class="w-full text-left">
+<h3 class="font-bold text-sm uppercase tracking-wide text-persona-genz">Gen-Z</h3>
+<p class="font-label-sm text-[10px] text-persona-genz uppercase mt-1 font-bold">ACTIVE</p>
+</div>
+<div class="w-full mt-2">
+<div class="flex justify-between mb-2">
+<span class="font-label-sm text-[9px] text-persona-genz/60">LORA_WEIGHT</span>
+<span class="font-label-sm text-[9px] text-persona-genz">0.99</span>
+</div>
+<div class="weight-bar-bg bg-persona-genz/10">
+<div class="weight-bar-fill bg-persona-genz" style="width: 99%;"></div>
+</div>
+</div>
+</button>
+<!-- Coach -->
+<button class="tech-card p-5 flex flex-col items-start gap-4 rounded">
+<div class="persona-square text-persona-coach">C</div>
+<div class="w-full text-left">
+<h3 class="font-bold text-sm uppercase tracking-wide">Coach</h3>
+<p class="font-label-sm text-[10px] text-outline uppercase mt-1">AURA: ORANGE</p>
+</div>
+<div class="w-full mt-2">
+<div class="flex justify-between mb-2">
+<span class="font-label-sm text-[9px] text-outline">LORA_WEIGHT</span>
+<span class="font-label-sm text-[9px]">0.40</span>
+</div>
+<div class="weight-bar-bg">
+<div class="weight-bar-fill bg-persona-coach" style="width: 40%;"></div>
+</div>
+</div>
+</button>
+<!-- Detective -->
+<button class="tech-card p-5 flex flex-col items-start gap-4 rounded">
+<div class="persona-square text-persona-detective">D</div>
+<div class="w-full text-left">
+<h3 class="font-bold text-sm uppercase tracking-wide">Detective</h3>
+<p class="font-label-sm text-[10px] text-outline uppercase mt-1">AURA: CHARCOAL</p>
+</div>
+<div class="w-full mt-2">
+<div class="flex justify-between mb-2">
+<span class="font-label-sm text-[9px] text-outline">LORA_WEIGHT</span>
+<span class="font-label-sm text-[9px]">0.55</span>
+</div>
+<div class="weight-bar-bg">
+<div class="weight-bar-fill bg-persona-detective" style="width: 55%;"></div>
+</div>
+</div>
+</button>
+</section>
+<!-- Chat Panel -->
+<section class="tech-card rounded min-h-[500px] flex flex-col p-8 bg-white">
+<div class="flex-1 space-y-6 overflow-y-auto pb-6">
+<!-- User Message -->
+<div class="flex justify-end">
+<div class="chat-bubble rounded-sm bg-surface-container-low text-on-surface-variant">
+<p class="text-body-md">Can you help me write a quick introduction for my new character-driven storytelling app?</p>
+</div>
+</div>
+<!-- Persona Response -->
+<div class="flex gap-4 items-start">
+<div class="persona-square text-persona-genz shrink-0 rounded-sm">G</div>
+<div class="chat-bubble rounded-sm bg-white">
+<span class="block font-label-sm text-[10px] text-persona-genz mb-2 uppercase font-bold tracking-widest border-b border-persona-genz/20 pb-1 inline-block">GEN-Z PERSONA</span>
+<p class="text-body-md leading-relaxed text-on-surface">literally nobody asked but okay, let's write something i guess. 🙄 just make it like, aesthetically pleasing or whatever.</p>
+</div>
+</div>
+</div>
+<!-- Input Area -->
+<div class="mt-8 border-t border-outline-variant pt-6">
+<div class="flex items-center gap-4">
+<div class="relative flex-1">
+<input class="w-full border border-outline-variant rounded-sm bg-surface-bright px-4 py-3 focus:border-primary focus:ring-0 placeholder:text-outline/50 font-body-md transition-colors" placeholder="Type a message to the AI..." type="text"/>
+</div>
+<button class="h-[46px] px-6 bg-primary text-white font-label-md uppercase tracking-widest hover:bg-on-surface-variant transition-colors flex items-center gap-2 rounded-sm">
+<span>Send</span>
+<span class="material-symbols-outlined text-sm">send</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Footer Line -->
+<footer class="text-center pb-8">
+<p class="text-[11px] font-label-sm text-outline uppercase tracking-widest">
+            Learning project — hand-written LoRA fine-tuning on GPT-2, no peft library.
+        </p>
+</footer>
+</main>
+<!-- Bottom Nav Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-3 bg-white border-t border-outline-variant">
+<a class="flex flex-col items-center justify-center text-primary border-t-2 border-primary pt-1 px-4" href="#">
+<span class="material-symbols-outlined text-xl mb-0.5" style="font-variation-settings: 'FILL' 1;">face</span>
+<span class="font-label-sm text-[9px] uppercase tracking-tighter">Personas</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-secondary-container px-4" href="#">
+<span class="material-symbols-outlined text-xl mb-0.5">chat_bubble</span>
+<span class="font-label-sm text-[9px] uppercase tracking-tighter">Chat</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-secondary-container px-4" href="#">
+<span class="material-symbols-outlined text-xl mb-0.5">settings</span>
+<span class="font-label-sm text-[9px] uppercase tracking-tighter">Settings</span>
+</a>
+</nav>
+<script>
+    // Micro-interactions for character selection
+    const cards = document.querySelectorAll('.tech-card:not(section)');
+    cards.forEach(card => {
+        card.addEventListener('click', () => {
+            // Visual feedback
+            card.style.opacity = "0.7";
+            setTimeout(() => {
+                card.style.opacity = "1";
+            }, 100);
+        });
+    });
+</script>
+</body></html>
