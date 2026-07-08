@@ -1,6 +1,8 @@
 
 
-# Adaptive GPT-2 LoRA    ( built to understand Low Rank Adaptation (LoRA) mechanics )
+# Adaptive GPT-2 LoRA    
+( built to understand Low Rank Adaptation (LoRA) mechanics )
+
 
 Hand-written LoRA implementation — no `peft`. Trains 5 independent LoRA adapters on GPT-2, each swappable at inference without reloading the base model.
 
