@@ -23,8 +23,12 @@ export default function Home() {
         style={{ paddingTop: "3rem", paddingBottom: "2rem" }}
       >
         {/* Eyebrow tag */}
-        <div style={{ marginBottom: "1rem" }}>
+        <div
+          className="flex flex-wrap items-center justify-center"
+          style={{ marginBottom: "1rem", gap: "0.5rem" }}
+        >
           <span className="eyebrow-tag">MODEL: GPT-2 SMALL (LORA)</span>
+          <span className="eyebrow-tag">VRAM: 6GB · LEARNING PROJECT</span>
         </div>
 
         {/* Title */}
