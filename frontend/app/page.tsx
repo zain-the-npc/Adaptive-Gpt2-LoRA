@@ -53,8 +53,7 @@ export default function Home() {
             lineHeight: "1.5",
           }}
         >
-          Select a persona to begin fine-tuned inference and experience adaptive
-          personality shifting.
+          A demo interface for testing inference from custom-trained LoRA adapters on GPT-2.
         </p>
       </header>
 
