@@ -55,6 +55,44 @@ export default function Home() {
         >
           A demo interface for testing inference from custom-trained LoRA adapters on GPT-2.
         </p>
+
+        {/* Note Callout */}
+        <div
+          style={{
+            marginTop: "1.5rem",
+            padding: "0.75rem 1rem",
+            backgroundColor: "rgba(217, 119, 6, 0.04)",
+            border: "1px solid rgba(217, 119, 6, 0.15)",
+            borderLeft: "4px solid #d97706",
+            borderRadius: "4px",
+            maxWidth: "38rem",
+            width: "90%",
+            textAlign: "left",
+          }}
+        >
+          <div
+            className="mono font-bold"
+            style={{
+              fontSize: "10px",
+              letterSpacing: "0.15em",
+              color: "#b45309",
+              marginBottom: "0.25rem",
+              textTransform: "uppercase",
+            }}
+          >
+            Learning Project
+          </div>
+          <p
+            style={{
+              fontSize: "12px",
+              color: "#444748",
+              lineHeight: "1.4",
+              margin: 0,
+            }}
+          >
+            This is a personal learning project — GPT-2 Small fine-tuned with hand-written LoRA adapters (no PEFT library). Outputs are experimental and may be incoherent.
+          </p>
+        </div>
       </header>
 
       {/* ── Content ─────────────────────────────────────── */}
